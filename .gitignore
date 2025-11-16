@@ -17,7 +17,7 @@ buildNumber.properties
 .project
 .classpath
 .settings/
-
+.env
 # OS
 .DS_Store
 Thumbs.db

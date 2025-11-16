@@ -16,17 +16,17 @@
           "mode": "urlencoded",
           "urlencoded": [
             { "key": "grant_type", "value": "password" },
-            { "key": "client_id", "value": "tu-client-id" },
-            { "key": "username", "value": "admin" },
-            { "key": "password", "value": "admin" }
+            { "key": "client_id", "value": "tpi-client" },
+            { "key": "username", "value": "testuser" },
+            { "key": "password", "value": "password123" }
           ]
         },
         "url": {
-          "raw": "http://localhost:8084/realms/tu-realm/protocol/openid-connect/token",
+          "raw": "http://localhost:8084/realms/tpi-realm/protocol/openid-connect/token",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8084",
-          "path": ["realms","tu-realm","protocol","openid-connect","token"]
+          "path": ["realms","tpi-realm","protocol","openid-connect","token"]
         }
       }
     },
@@ -43,10 +43,10 @@
           "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan@mail.com\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8081/solicitudes/clientes",
+          "raw": "http://localhost:8080/solicitudes/clientes",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "8081",
+          "port": "8080",
           "path": ["solicitudes","clientes"]
         }
       }
@@ -59,10 +59,10 @@
           { "key": "Authorization", "value": "Bearer {{token}}" }
         ],
         "url": {
-          "raw": "http://localhost:8081/solicitudes/clientes/1",
+          "raw": "http://localhost:8080/solicitudes/clientes/1",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "8081",
+          "port": "8080",
           "path": ["solicitudes","clientes","1"]
         }
       }
@@ -77,13 +77,13 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"origen\": \"Buenos Aires\",\n  \"destino\": \"Rosario\"\n}"
+          "raw": "{\n  \"origen\": \"Buenos Aires, Argentina\",\n  \"destino\": \"Córdoba, Argentina\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8082/operaciones/tramos",
+          "raw": "http://localhost:8080/operaciones/tramos",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "8082",
+          "port": "8080",
           "path": ["operaciones","tramos"]
         }
       }
@@ -101,10 +101,10 @@
           "raw": "{\n  \"tramosIds\": [1,2]\n}"
         },
         "url": {
-          "raw": "http://localhost:8082/operaciones/rutas/1/asignar-tramos",
+          "raw": "http://localhost:8080/operaciones/rutas/1/asignar-tramos",
           "protocol": "http",
           "host": ["localhost"],
-          "port": "8082",
+          "port": "8080",
           "path": ["operaciones","rutas","1","asignar-tramos"]
         }
       }
