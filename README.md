@@ -1,4 +1,22 @@
-# TPI Microservicios - Documentación de Decisiones y Desafíos
+# TPI Microservicios - Backend de Aplicaciones 2025
+
+## 📋 Requerimientos Funcionales Implementados
+
+Este proyecto implementa los **11 requerimientos funcionales mínimos** especificados en el `enunciado.md`:
+
+✅ **RF1**: Registrar nueva solicitud de transporte con cliente y contenedor
+✅ **RF2**: Consultar estado del transporte de un contenedor
+✅ **RF3**: Consultar rutas tentativas con tramos sugeridos, tiempo y costo estimados
+✅ **RF4**: Asignar ruta con todos sus tramos a la solicitud
+✅ **RF5**: Consultar contenedores pendientes de entrega con filtros
+✅ **RF6**: Asignar camión a un tramo de traslado
+✅ **RF7**: Determinar inicio o fin de un tramo de traslado (Transportista)
+✅ **RF8**: Calcular costo total de la entrega
+✅ **RF9**: Registrar cálculo de tiempo real y costo real al finalizar
+✅ **RF10**: Registrar y actualizar depósitos, camiones y tarifas
+✅ **RF11**: Validar que un camión no supere su capacidad máxima
+
+📚 **Ver documentación completa de endpoints:** [API-ENDPOINTS.md](./API-ENDPOINTS.md)
 
 ## Estructura General
 - El sistema está dividido en tres proyectos principales: `api-gateway`, `microservicio-operaciones` y `microservicio-solicitudes`.

@@ -1,39 +1,26 @@
-# Java
-*.class
-*.jar
-*.war
-*.ear
-target/
-*.log
-
 # Maven
-.mvn/
-!.mvn/wrapper/maven-wrapper.jar
-mvnw
-mvnw.cmd
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
 # IDE
 .idea/
 *.iml
 .vscode/
-*.swp
-*.swo
-*~
-
-# Spring Boot
-HELP.md
-spring-shell.log
-
-# Docker
-.env
+.project
+.classpath
+.settings/
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Logs
-logs/
 *.log
-
-# Test
-*.tmp

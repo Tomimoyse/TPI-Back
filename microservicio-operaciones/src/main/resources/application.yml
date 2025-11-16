@@ -21,7 +21,7 @@ spring:
 
 google:
   maps:
-    api-key: ${GOOGLE_MAPS_API_KEY:AIzaSyAQ1jB70HPqwOyh0bceV3BqRbaIHXH37_A}
+    api-key: ${GOOGLE_MAPS_API_KEY:}
 
 management:
   endpoints:
