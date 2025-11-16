@@ -1,0 +1,114 @@
+{
+  "info": {
+    "_postman_id": "tpi-microservicios-coleccion",
+    "name": "TPI Microservicios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Obtener Token Keycloak",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "grant_type", "value": "password" },
+            { "key": "client_id", "value": "tu-client-id" },
+            { "key": "username", "value": "admin" },
+            { "key": "password", "value": "admin" }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8084/realms/tu-realm/protocol/openid-connect/token",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8084",
+          "path": ["realms","tu-realm","protocol","openid-connect","token"]
+        }
+      }
+    },
+    {
+      "name": "Crear Cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan@mail.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/solicitudes/clientes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["solicitudes","clientes"]
+        }
+      }
+    },
+    {
+      "name": "Eliminar Cliente (solo ADMIN)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/solicitudes/clientes/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["solicitudes","clientes","1"]
+        }
+      }
+    },
+    {
+      "name": "Crear Tramo (calcula distancia)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"origen\": \"Buenos Aires\",\n  \"destino\": \"Rosario\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/operaciones/tramos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["operaciones","tramos"]
+        }
+      }
+    },
+    {
+      "name": "Asignar Tramos a Ruta",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tramosIds\": [1,2]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8082/operaciones/rutas/1/asignar-tramos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["operaciones","rutas","1","asignar-tramos"]
+        }
+      }
+    }
+  ]
+}
+

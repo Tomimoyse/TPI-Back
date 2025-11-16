@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  
+  cloud:
+    gateway:
+      routes:
+        - id: microservicio-solicitudes
+          uri: http://microservicio-solicitudes:8081
+          predicates:
+            - Path=/solicitudes/**
+        
+        - id: microservicio-operaciones
+          uri: http://microservicio-operaciones:8082
+          predicates:
+            - Path=/operaciones/**
+      
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
