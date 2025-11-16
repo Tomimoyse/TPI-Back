@@ -1,0 +1,15 @@
+com/tpi/solicitudes/config/SecurityConfig.class
+com/tpi/solicitudes/MicroservicioSolicitudesApplication.class
+com/tpi/solicitudes/service/ClienteService.class
+com/tpi/solicitudes/model/Contenedor.class
+com/tpi/solicitudes/repository/ClienteRepository.class
+com/tpi/solicitudes/repository/ContenedorRepository.class
+com/tpi/solicitudes/model/Solicitud.class
+com/tpi/solicitudes/service/SolicitudService.class
+com/tpi/solicitudes/repository/SolicitudRepository.class
+com/tpi/solicitudes/model/Cliente.class
+com/tpi/solicitudes/controller/ContenedorController.class
+com/tpi/solicitudes/controller/ClienteController.class
+com/tpi/solicitudes/service/ContenedorService.class
+com/tpi/solicitudes/controller/SolicitudController.class
+com/tpi/solicitudes/controller/TestController.class
