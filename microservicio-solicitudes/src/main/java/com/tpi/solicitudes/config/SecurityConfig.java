@@ -12,6 +12,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,9 +28,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/actuator/**").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                .requestMatchers("/solicitudes/**").authenticated()
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2
@@ -40,16 +46,23 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(false);
+        
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     public JwtDecoder jwtDecoder() {
-        String jwkSetUri = "http://keycloak:8080/realms/tpi-realm/protocol/openid-connect/certs";
-        
-        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-        
-        jwtDecoder.setJwtValidator(token -> {
-            return org.springframework.security.oauth2.core.OAuth2TokenValidatorResult.success();
-        });
-        
-        return jwtDecoder;
+        return NimbusJwtDecoder
+            .withJwkSetUri("http://keycloak:8080/realms/tpi-realm/protocol/openid-connect/certs")
+            .build();
     }
 
     @Bean
@@ -61,14 +74,13 @@ public class SecurityConfig {
 
     static class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
         @Override
-        @SuppressWarnings("unchecked")
         public Collection<GrantedAuthority> convert(Jwt jwt) {
-            Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm_access");
-            
+            Map<String, Object> realmAccess = jwt.getClaim("realm_access");
             if (realmAccess == null || !realmAccess.containsKey("roles")) {
                 return List.of();
             }
             
+            @SuppressWarnings("unchecked")
             List<String> roles = (List<String>) realmAccess.get("roles");
             
             return roles.stream()

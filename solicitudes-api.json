@@ -1,0 +1,710 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8081",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/solicitudes/solicitudes/{id}/finalizar": {
+            "put": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "finalizarSolicitud",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes/{id}/estado": {
+            "get": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "consultarEstado",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "actualizarEstado",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes/{id}/asignar-ruta": {
+            "put": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "asignarRuta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes": {
+            "get": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "getAll",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Solicitud"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Solicitud"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes/completa": {
+            "post": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "crearSolicitudCompleta",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/contenedores": {
+            "get": {
+                "tags": [
+                    "contenedor-controller"
+                ],
+                "operationId": "getAll_1",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Contenedor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "contenedor-controller"
+                ],
+                "operationId": "create_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Contenedor"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contenedor"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/clientes": {
+            "get": {
+                "tags": [
+                    "cliente-controller"
+                ],
+                "operationId": "getAll_2",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cliente"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "cliente-controller"
+                ],
+                "operationId": "create_2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cliente"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cliente"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/test": {
+            "get": {
+                "tags": [
+                    "test-controller"
+                ],
+                "operationId": "test",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes/{id}": {
+            "get": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "getById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Solicitud"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/solicitudes/solicitudes/pendientes": {
+            "get": {
+                "tags": [
+                    "solicitud-controller"
+                ],
+                "operationId": "consultarPendientes",
+                "parameters": [
+                    {
+                        "name": "estado",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Solicitud"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/solicitudes/contenedores/{id}": {
+            "get": {
+                "tags": [
+                    "contenedor-controller"
+                ],
+                "operationId": "getById_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contenedor"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "contenedor-controller"
+                ],
+                "operationId": "delete_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/solicitudes/clientes/{id}": {
+            "get": {
+                "tags": [
+                    "cliente-controller"
+                ],
+                "operationId": "getById_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cliente"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "cliente-controller"
+                ],
+                "operationId": "delete_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cliente": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telefono": {
+                        "type": "string"
+                    },
+                    "direccion": {
+                        "type": "string"
+                    },
+                    "documento": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Contenedor": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "identificacion": {
+                        "type": "string"
+                    },
+                    "tipo": {
+                        "type": "string"
+                    },
+                    "capacidad": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "peso": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "volumen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "estado": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Solicitud": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "descripcion": {
+                        "type": "string"
+                    },
+                    "fecha": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "cliente": {
+                        "$ref": "#/components/schemas/Cliente"
+                    },
+                    "contenedor": {
+                        "$ref": "#/components/schemas/Contenedor"
+                    },
+                    "estado": {
+                        "type": "string"
+                    },
+                    "direccionOrigen": {
+                        "type": "string"
+                    },
+                    "direccionDestino": {
+                        "type": "string"
+                    },
+                    "latitudOrigen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "longitudOrigen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "latitudDestino": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "longitudDestino": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoEstimado": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoFinal": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "tiempoEstimadoHoras": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tiempoRealHoras": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "rutaId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "fechaCreacion": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "fechaActualizacion": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}

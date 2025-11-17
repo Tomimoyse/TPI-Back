@@ -1,0 +1,1376 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8082",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/operaciones/tramos/{id}/iniciar": {
+            "put": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "iniciarTramo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tramo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos/{id}/finalizar": {
+            "put": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "finalizarTramo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tramo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos/{id}/asignar-camion": {
+            "put": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "asignarCamion",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tramo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas/{id}/calcular-real": {
+            "put": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "calcularCostoTiempoReal",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ruta"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/camiones/{dominio}": {
+            "get": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "getById_5",
+                "parameters": [
+                    {
+                        "name": "dominio",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Camion"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "dominio",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Camion"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Camion"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "delete_4",
+                "parameters": [
+                    {
+                        "name": "dominio",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos": {
+            "get": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "listarTramos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tramo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "crearTramo",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tramo"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tramo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramo-deposito": {
+            "get": {
+                "tags": [
+                    "tramo-deposito-controller"
+                ],
+                "operationId": "getAll",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TramoDeposito"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tramo-deposito-controller"
+                ],
+                "operationId": "create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TramoDeposito"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TramoDeposito"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tarifas": {
+            "get": {
+                "tags": [
+                    "tarifa-controller"
+                ],
+                "operationId": "getAll_1",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Tarifa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tarifa-controller"
+                ],
+                "operationId": "create_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tarifa"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarifa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas": {
+            "get": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "getAll_2",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ruta"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "create_2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ruta"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ruta"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas/{id}/asignar-tramos": {
+            "post": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "asignarTramos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ruta"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas/calcular-tentativa": {
+            "post": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "calcularRutaTentativa",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ruta"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/depositos": {
+            "get": {
+                "tags": [
+                    "deposito-controller"
+                ],
+                "operationId": "getAll_3",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Deposito"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "deposito-controller"
+                ],
+                "operationId": "create_3",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Deposito"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deposito"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/camiones": {
+            "get": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "getAll_4",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Camion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "create_4",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Camion"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Camion"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos/{id}": {
+            "get": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "getById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tramo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos/distancia": {
+            "get": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "calcularDistancia",
+                "parameters": [
+                    {
+                        "name": "origen",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "destino",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramos/distancia-coordenadas": {
+            "get": {
+                "tags": [
+                    "tramo-controller"
+                ],
+                "operationId": "calcularDistanciaPorCoordenadas",
+                "parameters": [
+                    {
+                        "name": "lat1",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "lon1",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "lat2",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "lon2",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tramo-deposito/{id}": {
+            "get": {
+                "tags": [
+                    "tramo-deposito-controller"
+                ],
+                "operationId": "getById_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TramoDeposito"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tramo-deposito-controller"
+                ],
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/operaciones/test": {
+            "get": {
+                "tags": [
+                    "test-controller"
+                ],
+                "operationId": "test",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/tarifas/{id}": {
+            "get": {
+                "tags": [
+                    "tarifa-controller"
+                ],
+                "operationId": "getById_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tarifa"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tarifa-controller"
+                ],
+                "operationId": "delete_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas/{id}": {
+            "get": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "getById_3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ruta"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "delete_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/operaciones/rutas/{id}/tiene-tramos": {
+            "get": {
+                "tags": [
+                    "ruta-controller"
+                ],
+                "operationId": "tieneTramos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/depositos/{id}": {
+            "get": {
+                "tags": [
+                    "deposito-controller"
+                ],
+                "operationId": "getById_4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Deposito"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "deposito-controller"
+                ],
+                "operationId": "delete_3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/operaciones/camiones/{dominio}/puede-transportar": {
+            "get": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "puedeTransportar",
+                "parameters": [
+                    {
+                        "name": "dominio",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "peso",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "volumen",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/camiones/disponibles": {
+            "get": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "getDisponibles",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Camion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/operaciones/camiones/aptos": {
+            "get": {
+                "tags": [
+                    "camion-controller"
+                ],
+                "operationId": "getAptos",
+                "parameters": [
+                    {
+                        "name": "peso",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    {
+                        "name": "volumen",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Camion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tramo": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "origen": {
+                        "type": "string"
+                    },
+                    "destino": {
+                        "type": "string"
+                    },
+                    "latitudOrigen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "longitudOrigen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "latitudDestino": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "longitudDestino": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "tipoTramo": {
+                        "type": "string"
+                    },
+                    "estado": {
+                        "type": "string"
+                    },
+                    "distancia": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoAproximado": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoReal": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "fechaHoraInicio": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "fechaHoraFin": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "fechaHoraEstimadaInicio": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "fechaHoraEstimadaFin": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "camionDominio": {
+                        "type": "string"
+                    },
+                    "depositoId": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "Ruta": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "type": "string"
+                    },
+                    "solicitudId": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "cantidadTramos": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "cantidadDepositos": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "distanciaTotal": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoEstimado": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoReal": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "tiempoEstimadoHoras": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tiempoRealHoras": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tramos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Tramo"
+                        }
+                    }
+                }
+            },
+            "Camion": {
+                "type": "object",
+                "properties": {
+                    "dominio": {
+                        "type": "string"
+                    },
+                    "nombreTransportista": {
+                        "type": "string"
+                    },
+                    "telefono": {
+                        "type": "string"
+                    },
+                    "capacidadPeso": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "capacidadVolumen": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "disponible": {
+                        "type": "boolean"
+                    },
+                    "consumoPorKm": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoBasePorKm": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "Deposito": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "type": "string"
+                    },
+                    "direccion": {
+                        "type": "string"
+                    },
+                    "latitud": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "longitud": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "costoEstadiaDiaria": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "TramoDeposito": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "tramo": {
+                        "$ref": "#/components/schemas/Tramo"
+                    },
+                    "deposito": {
+                        "$ref": "#/components/schemas/Deposito"
+                    }
+                }
+            },
+            "Tarifa": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "descripcion": {
+                        "type": "string"
+                    },
+                    "costoBaseKm": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "valorLitroCombustible": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "pesoMinimo": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "pesoMaximo": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "volumenMinimo": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "volumenMaximo": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "cargoGestionFijo": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            }
+        }
+    }
+}
