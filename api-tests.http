@@ -1,14 +1,14 @@
 ### Variables
 @baseUrl = http://localhost:8080
 @keycloakUrl = http://localhost:8084
-@clientSecret = 5oPCCoY26V5wfxCFBUvZxE3FIq7MjJDZ
+@clientSecret = 53r9c33AGObCgCi7S1emCa4wuYJIMDeP
 
 ### 1. Obtener Token
 # @name login
 POST {{keycloakUrl}}/realms/tpi-realm/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-&grant_type=password
+grant_type=password
 &client_id=tpi-client
 &client_secret={{clientSecret}}
 &username=testuser
@@ -17,25 +17,55 @@ Content-Type: application/x-www-form-urlencoded
 ### Guardar token (ejecuta después del login)
 @token = {{login.response.body.access_token}}
 
-### 2. Probar
+###############################################
+### MICROSERVICIO SOLICITUDES
+###############################################
+
+### 2. Test Solicitudes
+GET {{baseUrl}}/solicitudes/test
+Authorization: Bearer {{token}}
+
+### 3. Listar Clientes
 GET {{baseUrl}}/solicitudes/clientes
 Authorization: Bearer {{token}}
 
-### 3. Crear Cliente
+### 4. Crear Cliente
 # @name crearCliente
 POST {{baseUrl}}/solicitudes/clientes
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "nombre": "Messi",
-  "email": "messi@example.com"
+  "nombre": "nessi",
+  "email": "nessi@example.com"
 }
 
 ### Guardar ID del cliente
 @clienteId = {{crearCliente.response.body.id}}
 
-### 4. Crear Contenedor
+### 5. Obtener Cliente por ID
+GET {{baseUrl}}/solicitudes/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+
+### 6. Actualizar Cliente
+PUT {{baseUrl}}/solicitudes/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Lionel Messi",
+  "email": "lionel.messi@example.com"
+}
+
+### 7. Eliminar Cliente (requiere rol ADMIN)
+DELETE {{baseUrl}}/solicitudes/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+
+### 8. Listar Contenedores
+GET {{baseUrl}}/solicitudes/contenedores
+Authorization: Bearer {{token}}
+
+### 9. Crear Contenedor
 # @name crearContenedor
 POST {{baseUrl}}/solicitudes/contenedores
 Authorization: Bearer {{token}}
@@ -43,13 +73,23 @@ Content-Type: application/json
 
 {
   "tipo": "30 pies",
-  "capacidad": 20.2
+  "volumen": 23.2,
+  "peso": 16000
 }
 
 ### Guardar ID del contenedor
 @contenedorId = {{crearContenedor.response.body.id}}
 
-### 5. Crear Solicitud
+### 10. Obtener Contenedor por ID
+GET {{baseUrl}}/solicitudes/contenedores/{{contenedorId}}
+Authorization: Bearer {{token}}
+
+### 11. Listar Solicitudes
+GET {{baseUrl}}/solicitudes/solicitudes
+Authorization: Bearer {{token}}
+
+### 12. Crear Solicitud
+# @name crearSolicitud
 POST {{baseUrl}}/solicitudes/solicitudes
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -61,33 +101,81 @@ Content-Type: application/json
   "fecha": "2025-11-20"
 }
 
-### 6. Listar Solicitudes
-GET {{baseUrl}}/solicitudes/solicitudes
+### Guardar ID de la solicitud
+@solicitudId = {{crearSolicitud.response.body.id}}
+
+### 13. Obtener Solicitud por ID
+GET {{baseUrl}}/solicitudes/solicitudes/{{solicitudId}}
 Authorization: Bearer {{token}}
 
-### 7. Listar Contenedores
-GET {{baseUrl}}/solicitudes/contenedores
+###############################################
+### MICROSERVICIO OPERACIONES
+###############################################
+
+### 14. Test Operaciones
+GET {{baseUrl}}/operaciones/test
 Authorization: Bearer {{token}}
 
-### 8. Crear Tramo (calcula distancia automáticamente)
-POST {{baseUrl}}/operaciones/tramos
+### 15. Listar Camiones
+GET {{baseUrl}}/operaciones/camiones
+Authorization: Bearer {{token}}
+
+### 16. Crear Camión
+# @name crearCamion
+POST {{baseUrl}}/operaciones/camiones
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "origen": "Buenos Aires, Argentina",
-  "destino": "Córdoba, Argentina"
+  "dominio": "ABC123",
+  "modelo": "Scania R450",
+  "capacidadPeso": 25000,
+  "capacidadVolumen": 80,
+  "estado": "DISPONIBLE"
 }
 
-### 9. Listar Tramos
-GET {{baseUrl}}/operaciones/tramos
+### Guardar dominio del camión
+@camionDominio = {{crearCamion.response.body.dominio}}
+
+### 17. Obtener Camión por Dominio
+GET {{baseUrl}}/operaciones/camiones/{{camionDominio}}
 Authorization: Bearer {{token}}
 
-### 10. Calcular Distancia entre dos puntos
-GET {{baseUrl}}/operaciones/tramos/distancia?origen=Buenos Aires, Argentina&destino=Mendoza, Argentina
+### 18. Actualizar Camión
+PUT {{baseUrl}}/operaciones/camiones/{{camionDominio}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "dominio": "ABC123",
+  "modelo": "Scania R450 Updated",
+  "capacidadPeso": 26000,
+  "capacidadVolumen": 85,
+  "estado": "DISPONIBLE"
+}
+
+### 19. Listar Camiones Disponibles
+GET {{baseUrl}}/operaciones/camiones/disponibles
 Authorization: Bearer {{token}}
 
-### 11. Crear Depósito
+### 20. Obtener Camiones Aptos para Contenedor
+GET {{baseUrl}}/operaciones/camiones/aptos?peso=15000&volumen=50
+Authorization: Bearer {{token}}
+
+### 21. Verificar si Camión puede Transportar
+GET {{baseUrl}}/operaciones/camiones/{{camionDominio}}/puede-transportar?peso=15000&volumen=50
+Authorization: Bearer {{token}}
+
+### 22. Eliminar Camión (requiere rol ADMIN)
+DELETE {{baseUrl}}/operaciones/camiones/{{camionDominio}}
+Authorization: Bearer {{token}}
+
+### 23. Listar Depósitos
+GET {{baseUrl}}/operaciones/depositos
+Authorization: Bearer {{token}}
+
+### 24. Crear Depósito
+# @name crearDeposito
 POST {{baseUrl}}/operaciones/depositos
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -98,10 +186,181 @@ Content-Type: application/json
   "capacidad": 1000
 }
 
-### 12. Listar Depósitos
-GET {{baseUrl}}/operaciones/depositos
+### Guardar ID del depósito
+@depositoId = {{crearDeposito.response.body.id}}
+
+### 25. Obtener Depósito por ID
+GET {{baseUrl}}/operaciones/depositos/{{depositoId}}
 Authorization: Bearer {{token}}
 
-### 13. Eliminar Cliente (requiere rol ADMIN)
-DELETE {{baseUrl}}/solicitudes/clientes/1
+### 26. Eliminar Depósito
+DELETE {{baseUrl}}/operaciones/depositos/{{depositoId}}
+Authorization: Bearer {{token}}
+
+### 27. Listar Tramos
+GET {{baseUrl}}/operaciones/tramos
+Authorization: Bearer {{token}}
+
+### 28. Crear Tramo (calcula distancia automáticamente)
+# @name crearTramo
+POST {{baseUrl}}/operaciones/tramos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "origen": "Buenos Aires, Argentina",
+  "destino": "Córdoba, Argentina",
+  "tipoTramo": "TERRESTRE"
+}
+
+### Guardar ID del tramo
+@tramoId = {{crearTramo.response.body.id}}
+
+### 29. Obtener Tramo por ID
+GET {{baseUrl}}/operaciones/tramos/{{tramoId}}
+Authorization: Bearer {{token}}
+
+### 30. RF6: Asignar Camión a Tramo
+PUT {{baseUrl}}/operaciones/tramos/{{tramoId}}/asignar-camion
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "camionDominio": "ABC123",
+  "peso": 15000,
+  "volumen": 50
+}
+
+### 31. RF7: Iniciar Tramo (Transportista)
+PUT {{baseUrl}}/operaciones/tramos/{{tramoId}}/iniciar
+Authorization: Bearer {{token}}
+
+### 32. RF7: Finalizar Tramo (Transportista)
+PUT {{baseUrl}}/operaciones/tramos/{{tramoId}}/finalizar
+Authorization: Bearer {{token}}
+
+### 33. Calcular Distancia entre dos puntos
+GET {{baseUrl}}/operaciones/tramos/distancia?origen=Buenos Aires, Argentina&destino=Mendoza, Argentina
+Authorization: Bearer {{token}}
+
+### 34. Calcular Distancia por Coordenadas
+GET {{baseUrl}}/operaciones/tramos/distancia-coordenadas?lat1=-34.6037&lon1=-58.3816&lat2=-31.4201&lon2=-64.1888
+Authorization: Bearer {{token}}
+
+### 35. Listar Tarifas
+GET {{baseUrl}}/operaciones/tarifas
+Authorization: Bearer {{token}}
+
+### 36. Crear Tarifa
+# @name crearTarifa
+POST {{baseUrl}}/operaciones/tarifas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "tipoCamion": "Scania R450",
+  "costoPorKm": 15.5,
+  "costoPorHora": 50.0
+}
+
+### Guardar ID de la tarifa
+@tarifaId = {{crearTarifa.response.body.id}}
+
+### 37. Obtener Tarifa por ID
+GET {{baseUrl}}/operaciones/tarifas/{{tarifaId}}
+Authorization: Bearer {{token}}
+
+### 38. Eliminar Tarifa
+DELETE {{baseUrl}}/operaciones/tarifas/{{tarifaId}}
+Authorization: Bearer {{token}}
+
+### 39. Listar Rutas
+GET {{baseUrl}}/operaciones/rutas
+Authorization: Bearer {{token}}
+
+### 40. Crear Ruta
+# @name crearRuta
+POST {{baseUrl}}/operaciones/rutas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "solicitudId": 1,
+  "origen": "Buenos Aires, Argentina",
+  "destino": "Córdoba, Argentina",
+  "estado": "TENTATIVA"
+}
+
+### Guardar ID de la ruta
+@rutaId = {{crearRuta.response.body.id}}
+
+### 41. Obtener Ruta por ID
+GET {{baseUrl}}/operaciones/rutas/{{rutaId}}
+Authorization: Bearer {{token}}
+
+### 42. RF3: Calcular Ruta Tentativa con Tramos Sugeridos
+POST {{baseUrl}}/operaciones/rutas/calcular-tentativa
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "solicitudId": 1,
+  "latitudOrigen": -34.6037,
+  "longitudOrigen": -58.3816,
+  "direccionOrigen": "Buenos Aires, Argentina",
+  "latitudDestino": -31.4201,
+  "longitudDestino": -64.1888,
+  "direccionDestino": "Córdoba, Argentina",
+  "depositoIds": [1, 2],
+  "peso": 15000,
+  "volumen": 50
+}
+
+### 43. Asignar Tramos a Ruta
+POST {{baseUrl}}/operaciones/rutas/{{rutaId}}/asignar-tramos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "tramosIds": [1, 2, 3]
+}
+
+### 44. Verificar si Ruta tiene Tramos
+GET {{baseUrl}}/operaciones/rutas/{{rutaId}}/tiene-tramos
+Authorization: Bearer {{token}}
+
+### 45. Calcular Costo y Tiempo Real de Ruta
+PUT {{baseUrl}}/operaciones/rutas/{{rutaId}}/calcular-real
+Authorization: Bearer {{token}}
+
+### 46. Eliminar Ruta
+DELETE {{baseUrl}}/operaciones/rutas/{{rutaId}}
+Authorization: Bearer {{token}}
+
+### 47. Listar Tramo-Depósito
+GET {{baseUrl}}/operaciones/tramo-deposito
+Authorization: Bearer {{token}}
+
+### 48. Crear Tramo-Depósito
+# @name crearTramoDeposito
+POST {{baseUrl}}/operaciones/tramo-deposito
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "tramoId": 1,
+  "depositoId": 1,
+  "fechaEntrada": "2025-11-20T10:00:00",
+  "fechaSalida": "2025-11-20T15:00:00"
+}
+
+### Guardar ID del tramo-depósito
+@tramoDepositoId = {{crearTramoDeposito.response.body.id}}
+
+### 49. Obtener Tramo-Depósito por ID
+GET {{baseUrl}}/operaciones/tramo-deposito/{{tramoDepositoId}}
+Authorization: Bearer {{token}}
+
+### 50. Eliminar Tramo-Depósito
+DELETE {{baseUrl}}/operaciones/tramo-deposito/{{tramoDepositoId}}
 Authorization: Bearer {{token}}
