@@ -1,7 +1,7 @@
 ### Variables
 @baseUrl = http://localhost:8080
 @keycloakUrl = http://localhost:8084
-@clientSecret = 53r9c33AGObCgCi7S1emCa4wuYJIMDeP
+@clientSecret = wuxirvPdQIruovQf7seKiDBI8ftppHtI
 
 ### 1. Obtener Token
 # @name login
@@ -244,7 +244,7 @@ GET {{baseUrl}}/operaciones/tramos/distancia?origen=Buenos Aires, Argentina&dest
 Authorization: Bearer {{token}}
 
 ### 34. Calcular Distancia por Coordenadas
-GET {{baseUrl}}/operaciones/tramos/distancia-coordenadas?lat1=-34.6037&lon1=-58.3816&lat2=-31.4201&lon2=-64.1888
+GET {{baseUrl}}/operaciones/tramos/distancia-coordenadas?lat1=-31.4201&lon1=-64.1888&lat2=-27.3671&lon2=-55.8961
 Authorization: Bearer {{token}}
 
 ### 35. Listar Tarifas
