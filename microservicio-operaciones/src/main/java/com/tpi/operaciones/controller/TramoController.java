@@ -96,18 +96,23 @@ public class TramoController {
         }
     }
     
+    // SOLO endpoint por coordenadas
     @GetMapping("/distancia-coordenadas")
-    public ResponseEntity<?> calcularDistanciaPorCoordenadas(
+    public ResponseEntity<Map<String, Object>> calcularDistanciaPorCoordenadas(
             @RequestParam Double lat1,
             @RequestParam Double lon1,
             @RequestParam Double lat2,
             @RequestParam Double lon2) {
         
-        try {
-            Double distancia = tramoService.calcularDistanciaPorCoordenadas(lat1, lon1, lat2, lon2);
-            return ResponseEntity.ok(distancia);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al calcular distancia: " + e.getMessage());
-        }
+        Double distancia = tramoService.calcularDistanciaPorCoordenadas(lat1, lon1, lat2, lon2);
+        
+        return ResponseEntity.ok(Map.of(
+            "distancia", distancia,
+            "unidad", "km",
+            "coordenadas", Map.of(
+                "origen", Map.of("lat", lat1, "lon", lon1),
+                "destino", Map.of("lat", lat2, "lon", lon2)
+            )
+        ));
     }
 }
